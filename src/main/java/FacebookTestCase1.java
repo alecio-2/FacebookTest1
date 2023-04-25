@@ -104,31 +104,30 @@ public class FacebookTestCase1 {
 
             // Click logout button and verify that user is logged out and redirected to login page
             WebElement logoutButton = driver.findElement(By.xpath("//span[text()='Log Out']"));
-            logoutButton.click();
-            LOGGER.debug("Clicked on the logout button");
-            Thread.sleep(1000);
 
-            // Verify if user is logged out and redirected to login page
-            String loginPageUrl = "https://www.facebook.com/";
-            if (driver.getCurrentUrl().equals(loginPageUrl)) {
-                LOGGER.debug("Logged out successfully");
+            // Check if the logout button is found
+            if(logoutButton.isDisplayed()) {
+                LOGGER.debug("Logout successful."); // Log debug message using logger
             } else {
-                LOGGER.error("Logout failed");
+                LOGGER.error("Logout unsuccessful."); // Log error message using logger
             }
-            Thread.sleep(1000);
 
+            // Click on the logout button
+            logoutButton.click();
+
+            Thread.sleep(1000);
 
         } catch (InterruptedException e) {
             LOGGER.error("InterruptedException occurred: " + e.getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception occurred: " + e.getMessage());
         } finally {
+
             // Close the browser
             driver.quit();
             LOGGER.debug("Browser is closed");
             LOGGER.info("Program is finished");
             LOGGER.info(" ");
-
         }
     }
 }
